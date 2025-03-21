@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sagnik Bose - AI Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #1a1a1a;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            width: 100%;
+            background: #2c2c2c;
+            padding: 20px 50px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ff4d4d;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ff4d4d;
+        }
+
+        /* Hero Section */
+        #hero {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ff4d4d, #ff914d);
+            color: #fff;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        #hero h1 {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            animation: fadeInUp 1s ease;
+        }
+
+        #hero p {
+            font-size: 24px;
+            font-weight: 600;
+            animation: fadeInUp 1s ease 0.3s;
+            animation-fill-mode: both;
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #ff4d4d;
+            position: relative;
+        }
+
+        section h2::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background: #ff4d4d;
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* About */
+        #about p {
+            font-size: 20px;
+            font-weight: 500;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeIn 1s ease;
+        }
+
+        /* Projects */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: #2c2c2c;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .project-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ff914d;
+            margin-bottom: 10px;
+        }
+
+        .project-card p {
+            font-weight: 500;
+        }
+
+        /* Contact */
+        #contact a {
+            display: block; /* Changed to block for mobile stacking */
+            margin: 15px 0;
+            color: #ff4d4d;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 600;
+            transition: color 0.3s;
+            text-align: center;
+        }
+
+        #contact a:hover {
+            color: #ff914d;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            nav {
+                padding: 15px 30px;
+            }
+
+            #hero h1 {
+                font-size: 48px;
+            }
+
+            #hero p {
+                font-size: 20px;
+            }
+
+            section {
+                padding: 60px 30px;
+            }
+
+            .project-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                padding: 15px 20px;
+            }
+
+            nav h1 {
+                font-size: 24px;
+            }
+
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 10px 15px;
+            }
+
+            #hero {
+                padding: 0 15px;
+            }
+
+            #hero h1 {
+                font-size: 36px;
+            }
+
+            #hero p {
+                font-size: 18px;
+            }
+
+            section {
+                padding: 50px 20px;
+            }
+
+            section h2 {
+                font-size: 32px;
+            }
+
+            #about p {
+                font-size: 18px;
+            }
+
+            .project-card {
+                padding: 20px;
+            }
+
+            .project-card h3 {
+                font-size: 22px;
+            }
+
+            .project-card p {
+                font-size: 16px;
+            }
+
+            #contact a {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 10px 15px;
+            }
+
+            nav h1 {
+                font-size: 20px;
+            }
+
+            nav ul li {
+                margin: 8px 10px;
+            }
+
+            nav ul li a {
+                font-size: 14px;
+            }
+
+            #hero h1 {
+                font-size: 28px;
+            }
+
+            #hero p {
+                font-size: 16px;
+            }
+
+            section {
+                padding: 40px 15px;
+            }
+
+            section h2 {
+                font-size: 28px;
+            }
+
+            section h2::after {
+                width: 40px;
+            }
+
+            #about p {
+                font-size: 16px;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr; /* Single column on very small screens */
+                gap: 15px;
+            }
+
+            .project-card h3 {
+                font-size: 20px;
+            }
+
+            .project-card p {
+                font-size: 14px;
+            }
+
+            #contact a {
+                font-size: 16px;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <h1>Sagnik Bose</h1>
+        <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div>
+            <h1>Hello, I'm Sagnik Bose</h1>
+            <p>AI Developer | Passionate about Innovation</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Me</h2>
+        <p>I am Sagnik Bose, a student passionate about AI development and the latest trends in the software industry. I enjoy building innovative solutions that push the boundaries of technology.</p>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <h3>Prompt Writer</h3>
+                <p>In the current AI landscape, prompting has become a crucial aspect of controlling LLM behavior. To address this, I developed an agent capable of generating powerful and effective prompts.</p>
+            </div>
+            <div class="project-card">
+                <h3>OllamaKaggle</h3>
+                <p>Developing AI tools often requires significant hardware investment. I created this tool to provide access to two Tesla T4 GPUs for LLM tasks.</p>
+            </div>
+            <div class="project-card">
+                <h3>ULM (United Language Model)</h3>
+                <p>I combined various large language models to create a unified model with enhanced performance and versatility.</p>
+            </div>
+            <div class="project-card">
+                <h3>Personal Portfolio App</h3>
+                <p>An Android app template I made in Flutter to create personal portfolio mobile applications.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact</h2>
+        <div>
+            <a href="mailto:sbose3739@gmail.com">sbose3739@gmail.com</a>
+            <a href="https://github.com/cyberytti" target="_blank">GitHub</a>
+            <a href="sample.linkedin.com" target="_blank">LinkedIn</a>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script>
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Scroll Animation Trigger
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.project-card, #about p').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
