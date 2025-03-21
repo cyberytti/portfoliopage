@@ -70,17 +70,40 @@
             padding: 0 20px;
         }
 
+        #hero .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #hero .profile-img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            object-fit: cover;
+            border: 5px solid #ffffff;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeIn 1s ease;
+        }
+
+        #hero .profile-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
         #hero h1 {
             font-size: 56px;
             font-weight: 800;
             margin-bottom: 10px;
-            animation: fadeInUp 1s ease;
+            animation: fadeInUp 1s ease 0.2s;
+            animation-fill-mode: both;
         }
 
         #hero p {
             font-size: 24px;
             font-weight: 600;
-            animation: fadeInUp 1s ease 0.3s;
+            animation: fadeInUp 1s ease 0.4s;
             animation-fill-mode: both;
         }
 
@@ -112,10 +135,13 @@
         }
 
         /* About */
+        #about {
+            text-align: center;
+        }
+
         #about p {
             font-size: 20px;
             font-weight: 500;
-            text-align: center;
             max-width: 800px;
             margin: 0 auto;
             animation: fadeIn 1s ease;
@@ -155,7 +181,7 @@
 
         /* Contact */
         #contact a {
-            display: block; /* Changed to block for mobile stacking */
+            display: block;
             margin: 15px 0;
             color: #ff4d4d;
             text-decoration: none;
@@ -190,6 +216,11 @@
         @media (max-width: 1024px) {
             nav {
                 padding: 15px 30px;
+            }
+
+            #hero .profile-img {
+                width: 220px;
+                height: 220px;
             }
 
             #hero h1 {
@@ -232,6 +263,11 @@
 
             #hero {
                 padding: 0 15px;
+            }
+
+            #hero .profile-img {
+                width: 180px;
+                height: 180px;
             }
 
             #hero h1 {
@@ -288,6 +324,11 @@
                 font-size: 14px;
             }
 
+            #hero .profile-img {
+                width: 140px;
+                height: 140px;
+            }
+
             #hero h1 {
                 font-size: 28px;
             }
@@ -313,7 +354,7 @@
             }
 
             .project-grid {
-                grid-template-columns: 1fr; /* Single column on very small screens */
+                grid-template-columns: 1fr;
                 gap: 15px;
             }
 
@@ -346,7 +387,8 @@
 
     <!-- Hero Section -->
     <section id="hero">
-        <div>
+        <div class="hero-content">
+            <img src="https://raw.githubusercontent.com/cyberytti/portfoliopage/main/image.png" alt="Sagnik Bose" class="profile-img">
             <h1>Hello, I'm Sagnik Bose</h1>
             <p>AI Developer | Passionate about Innovation</p>
         </div>
@@ -412,7 +454,7 @@
             });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('.project-card, #about p').forEach(el => {
+        document.querySelectorAll('.project-card, #about p, #hero .profile-img').forEach(el => {
             observer.observe(el);
         });
     </script>
