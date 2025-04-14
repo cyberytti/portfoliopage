@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sagnik Bose | AI/ML Engineer & Flutter Developer</title>
+    <!-- AOS CSS (for scroll animations) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         :root {
             --primary-color: #4a6fa5;
@@ -44,6 +46,7 @@
             color: var(--text-dark);
             background-color: var(--light-color);
             transition: var(--transition);
+            overflow-x: hidden; /* Prevent horizontal scrollbar caused by animations */
         }
 
         a {
@@ -99,6 +102,7 @@
 
         section {
             padding: 6rem 0;
+            overflow: hidden; /* Contain animations within section bounds */
         }
 
         .section-title {
@@ -230,7 +234,6 @@
         .hero-text {
             flex: 1;
             min-width: 300px;
-            /* padding-right: 2rem; Removed padding, use gap */
         }
 
         .hero-text h1 {
@@ -254,6 +257,8 @@
             flex: 1;
             min-width: 300px;
             text-align: center;
+            /* Add perspective for potential 3D effects on image if desired */
+            perspective: 800px;
         }
 
         .hero-image img {
@@ -265,7 +270,14 @@
             border: 5px solid var(--accent-color);
             box-shadow: var(--shadow);
             animation: float 3s ease-in-out infinite;
+            /* Add transition for potential future 3D transforms */
+            transition: transform 0.5s ease;
         }
+
+        /* Optional: Subtle 3D effect on hero image hover */
+        /* .hero-image img:hover {
+            transform: translateZ(20px) rotateY(5deg);
+        } */
 
         @keyframes float {
             0% { transform: translateY(0px); }
@@ -290,12 +302,11 @@
             color: #fff; /* Ensure icon color is light */
             transition: var(--transition);
             font-size: 1.1rem; /* Slightly larger icons */
-            /* margin-right: 1rem; Removed margin */
         }
 
         .social-icons a:hover {
             background: var(--secondary-color);
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.1); /* Added scale */
         }
 
         .hero-buttons { /* Wrapper for buttons */
@@ -325,7 +336,6 @@
         .about-text {
             flex: 1;
             min-width: 300px;
-            /* padding-right: 2rem; Removed padding */
         }
 
         .about-text h3 {
@@ -342,6 +352,7 @@
             flex: 1;
             min-width: 300px;
             text-align: center;
+            perspective: 1000px; /* Add perspective for 3D effect */
         }
 
         .about-image img {
@@ -350,7 +361,12 @@
             height: auto;
             border-radius: 10px;
             box-shadow: var(--shadow);
+            transition: transform 0.5s ease; /* Add transition */
         }
+        /* Optional: Subtle 3D effect on about image hover */
+        /* .about-image img:hover {
+            transform: translateZ(25px) rotateY(-5deg);
+        } */
 
         /* Skills Section */
         #skills {
@@ -364,6 +380,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
+            perspective: 1500px; /* Add perspective for child elements */
         }
 
         .skill-category {
@@ -371,7 +388,7 @@
             padding: 2rem;
             border-radius: 10px;
             box-shadow: var(--shadow);
-            transition: var(--transition);
+            transition: var(--transition), transform 0.4s ease; /* Add transform to transition */
         }
 
         [data-theme="dark"] .skill-category {
@@ -379,7 +396,7 @@
         }
 
         .skill-category:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) translateZ(15px); /* Add subtle Z translation */
         }
 
         .skill-category h3 {
@@ -418,7 +435,7 @@
             width: 0; /* Start at 0 width */
         }
 
-        /* --- Projects Section (Updated) --- */
+        /* --- Projects Section (Updated with 3D Hover) --- */
         #projects {
              background-color: rgba(74, 111, 165, 0.03); /* Slightly different subtle background */
         }
@@ -430,6 +447,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2.5rem; /* Increased gap */
+            perspective: 1200px; /* Add perspective for card 3D effects */
         }
 
         .project-card {
@@ -437,10 +455,14 @@
             border-radius: 12px; /* Slightly more rounded */
             overflow: hidden;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); /* Softer shadow */
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            /* Updated transition for smoother 3D effect */
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        border-color 0.3s ease;
             border: 1px solid transparent; /* Prepare for hover border */
             display: flex;
             flex-direction: column; /* Stack image and info */
+            transform-style: preserve-3d; /* Important for containing 3D transforms */
         }
 
         [data-theme="dark"] .project-card {
@@ -449,13 +471,14 @@
         }
 
         .project-card:hover {
-            transform: translateY(-8px); /* Adjust lift */
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* More pronounced hover shadow */
+            /* Combine lift, forward movement, and subtle tilt */
+            transform: translateY(-8px) translateZ(30px) rotateX(3deg) rotateY(2deg);
+            box-shadow: 0 18px 36px rgba(0, 0, 0, 0.2); /* Enhanced shadow for 3D */
             border-color: var(--accent-color); /* Accent border on hover */
         }
 
         [data-theme="dark"] .project-card:hover {
-             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+             box-shadow: 0 18px 36px rgba(0, 0, 0, 0.4); /* Darker enhanced shadow */
              border-color: var(--accent-color);
         }
 
@@ -469,11 +492,11 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.4s ease; /* Slower zoom */
+            transition: transform 0.5s ease; /* Slower zoom */
         }
 
         .project-card:hover .project-image img {
-            transform: scale(1.05); /* Less zoom */
+            transform: scale(1.03); /* Slightly reduced zoom on hover */
         }
 
         .project-info {
@@ -481,6 +504,8 @@
             flex-grow: 1; /* Allow info to fill space */
             display: flex;
             flex-direction: column; /* Stack info content */
+            /* Apply backface visibility if needed for complex rotations (usually not for this simple effect) */
+            /* backface-visibility: hidden; */
         }
 
         .project-info h3 {
@@ -550,12 +575,14 @@
             padding: 2.5rem; /* Increase padding */
             position: relative;
             box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
-            transform: scale(0.95); /* Start slightly smaller */
-            transition: transform 0.3s ease;
+            transform: scale(0.95) translateY(10px); /* Start slightly smaller and lower */
+            transition: transform 0.3s ease, opacity 0.3s ease; /* Add opacity transition */
+            opacity: 0; /* Start hidden for transition */
         }
 
         .modal.open .modal-content {
-             transform: scale(1); /* Scale to full size when open */
+             transform: scale(1) translateY(0); /* Scale and move to final position */
+             opacity: 1; /* Fade in */
         }
 
         .modal-close {
@@ -568,6 +595,10 @@
             cursor: pointer;
             color: var(--primary-color);
             line-height: 1; /* Prevent extra spacing */
+            transition: transform 0.2s ease;
+        }
+        .modal-close:hover {
+            transform: rotate(90deg);
         }
 
         .modal-body {
@@ -627,7 +658,12 @@
             display: flex;
             align-items: center;
             gap: 1rem;
+            transition: transform 0.3s ease; /* Add transition for potential hover */
         }
+        /* Optional: Subtle lift on contact item hover */
+        /* .contact-item:hover {
+            transform: translateX(5px);
+        } */
 
         .contact-icon {
             width: 50px;
@@ -640,7 +676,12 @@
             justify-content: center;
             font-size: 1.2rem;
             flex-shrink: 0; /* Prevent icon from shrinking */
+            transition: transform 0.3s ease;
         }
+        .contact-item:hover .contact-icon {
+            transform: scale(1.1) rotate(-10deg); /* Animate icon on parent hover */
+        }
+
         .contact-item div h3 {
             margin-bottom: 0.25rem; /* Reduce space below heading */
             font-size: 1.1rem;
@@ -655,11 +696,20 @@
             padding: 2rem;
             border-radius: 10px;
             box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+        /* Optional: Subtle lift on form hover */
+        /* .contact-form:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        } */
 
         [data-theme="dark"] .contact-form {
             background: #2a2a3e; /* Dark background for form */
         }
+        /* [data-theme="dark"] .contact-form:hover {
+             box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        } */
 
         .form-group {
             margin-bottom: 1.5rem;
@@ -838,6 +888,14 @@
 
             .skills-container, #projects .projects-container {
                 grid-template-columns: 1fr; /* Stack on smaller screens */
+                perspective: none; /* Disable perspective on stacked items */
+            }
+            .project-card:hover { /* Simplify hover on mobile */
+                 transform: translateY(-5px);
+                 box-shadow: var(--shadow); /* Use standard shadow */
+            }
+            [data-theme="dark"] .project-card:hover {
+                 box-shadow: var(--shadow); /* Use standard dark shadow */
             }
         }
 
@@ -895,22 +953,22 @@
     <section id="home">
         <div class="container">
             <div class="hero-content">
-                <div class="hero-text">
+                <div class="hero-text" data-aos="fade-right" data-aos-delay="100">
                     <h1>Hi, I'm Sagnik Bose</h1>
                     <h2>AI/ML Engineer & Flutter Developer</h2>
                     <p>A passionate student exploring the world of Software Development and Artificial Intelligence. I'm currently diving deep into AI/ML frameworks and love building beautiful, functional apps with Flutter.</p>
                     <div class="social-icons">
-                        <a href="https://github.com/cyberytti/" target="_blank" title="GitHub" aria-label="GitHub Profile">G</a>
-                        <a href="https://www.linkedin.com/in/sagnik-bose-01a885336/" target="_blank" title="LinkedIn" aria-label="LinkedIn Profile">L</a>
-                        <a href="https://www.instagram.com/sagnik628?igsh=MXEyamU0MDRlc2J2Zw==" target="_blank" title="Instagram" aria-label="Instagram Profile">I</a>
-                        <a href="mailto:sbose3739@gmail.com" title="Email" aria-label="Send Email">E</a>
+                        <a href="https://github.com/cyberytti/" target="_blank" title="GitHub" aria-label="GitHub Profile" data-aos="fade-up" data-aos-delay="300">G</a>
+                        <a href="https://www.linkedin.com/in/sagnik-bose-01a885336/" target="_blank" title="LinkedIn" aria-label="LinkedIn Profile" data-aos="fade-up" data-aos-delay="400">L</a>
+                        <a href="https://www.instagram.com/sagnik628?igsh=MXEyamU0MDRlc2J2Zw==" target="_blank" title="Instagram" aria-label="Instagram Profile" data-aos="fade-up" data-aos-delay="500">I</a>
+                        <a href="mailto:sbose3739@gmail.com" title="Email" aria-label="Send Email" data-aos="fade-up" data-aos-delay="600">E</a>
                     </div>
-                    <div class="hero-buttons">
+                    <div class="hero-buttons" data-aos="fade-up" data-aos-delay="700">
                         <a href="#projects" class="btn">View My Work</a>
                         <a href="#contact" class="btn btn-outline">Contact Me</a>
                     </div>
                 </div>
-                <div class="hero-image">
+                <div class="hero-image" data-aos="fade-left" data-aos-delay="200">
                     <img src="https://raw.githubusercontent.com/cyberytti/portfoliopage/main/image.png" alt="Sagnik Bose Profile Picture">
                 </div>
             </div>
@@ -920,16 +978,16 @@
     <!-- About Section -->
     <section id="about">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
+            <h2 class="section-title" data-aos="fade-down">About Me</h2>
             <div class="about-content">
-                <div class="about-text">
+                <div class="about-text" data-aos="fade-right" data-aos-delay="100">
                     <h3>Who am I?</h3>
                     <p>Hi, I'm Sagnik — a passionate student exploring the world of Software Development and Artificial Intelligence. I'm currently diving deep into AI/ML frameworks and love building beautiful, functional apps with Flutter.</p>
                     <p>I'm always excited to collaborate on AI/ML projects and contribute to the open-source community. Let's build something amazing together!</p>
                     <p>My professional fields include Software Development, AI/ML Engineering, and Flutter Development. I'm constantly learning and expanding my skill set to stay at the forefront of technology.</p>
                     <a href="#contact" class="btn">Get In Touch</a>
                 </div>
-                <div class="about-image">
+                <div class="about-image" data-aos="fade-left" data-aos-delay="200">
                     <img src="https://raw.githubusercontent.com/cyberytti/portfoliopage/main/anotherimage.png" alt="Sagnik Bose working">
                 </div>
             </div>
@@ -939,9 +997,9 @@
     <!-- Skills Section -->
     <section id="skills">
         <div class="container">
-            <h2 class="section-title">My Skills</h2>
+            <h2 class="section-title" data-aos="fade-down">My Skills</h2>
             <div class="skills-container">
-                <div class="skill-category">
+                <div class="skill-category" data-aos="flip-up" data-aos-delay="100">
                     <h3>Programming Languages</h3>
                     <div class="skill-item">
                         <div class="skill-info">
@@ -979,7 +1037,7 @@
                         <div class="skill-bar"><div class="skill-progress" data-width="85%"></div></div>
                     </div>
                 </div>
-                <div class="skill-category">
+                <div class="skill-category" data-aos="flip-up" data-aos-delay="200">
                     <h3>Tools & Technologies</h3>
                     <div class="skill-item">
                         <div class="skill-info">
@@ -1017,7 +1075,7 @@
                         <div class="skill-bar"><div class="skill-progress" data-width="85%"></div></div>
                     </div>
                 </div>
-                <div class="skill-category">
+                <div class="skill-category" data-aos="flip-up" data-aos-delay="300">
                     <h3>Frameworks</h3>
                     <div class="skill-item">
                         <div class="skill-info">
@@ -1055,10 +1113,10 @@
     <!-- Projects Section -->
     <section id="projects">
         <div class="container">
-            <h2 class="section-title">My Projects</h2>
+            <h2 class="section-title" data-aos="fade-down">My Projects</h2>
             <div class="projects-container">
                 <!-- Project Card 1 -->
-                <div class="project-card">
+                <div class="project-card" data-aos="zoom-in-up" data-aos-delay="100">
                     <div class="project-image">
                         <img src="https://raw.githubusercontent.com/cyberytti/portfoliopage/main/tictactoeAI.png" alt="Tic Tac Toe AI Screenshot">
                     </div>
@@ -1072,7 +1130,7 @@
                     </div>
                 </div>
                 <!-- Project Card 2 -->
-                <div class="project-card">
+                <div class="project-card" data-aos="zoom-in-up" data-aos-delay="200">
                     <div class="project-image">
                         <img src="https://raw.githubusercontent.com/cyberytti/portfoliopage/main/videototranscript.png" alt="Video to Transcript Converter Screenshot">
                     </div>
@@ -1086,7 +1144,7 @@
                     </div>
                 </div>
                 <!-- Project Card 3 -->
-                <div class="project-card">
+                <div class="project-card" data-aos="zoom-in-up" data-aos-delay="300">
                     <div class="project-image">
                         <img src="https://raw.githubusercontent.com/cyberytti/portfoliopage/main/ollamakaggle.png" alt="OllamaKaggle Screenshot">
                     </div>
@@ -1100,7 +1158,7 @@
                     </div>
                 </div>
                 <!-- Project Card 4 -->
-                <div class="project-card">
+                <div class="project-card" data-aos="zoom-in-up" data-aos-delay="400">
                     <div class="project-image">
                         <img src="https://raw.githubusercontent.com/cyberytti/portfoliopage/main/portfolioapp.png" alt="Portfolio App in Flutter Screenshot">
                     </div>
@@ -1130,31 +1188,31 @@
     <!-- Contact Section -->
     <section id="contact">
         <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
+            <h2 class="section-title" data-aos="fade-down">Get In Touch</h2>
             <div class="contact-container">
                 <div class="contact-info">
-                    <div class="contact-item">
+                    <div class="contact-item" data-aos="fade-right" data-aos-delay="100">
                         <div class="contact-icon">E</div>
                         <div>
                             <h3>Email</h3>
                             <a href="mailto:sbose3739@gmail.com">sbose3739@gmail.com</a>
                         </div>
                     </div>
-                    <div class="contact-item">
+                    <div class="contact-item" data-aos="fade-right" data-aos-delay="200">
                         <div class="contact-icon">G</div>
                         <div>
                             <h3>GitHub</h3>
                             <a href="https://github.com/cyberytti/" target="_blank">github.com/cyberytti</a>
                         </div>
                     </div>
-                    <div class="contact-item">
+                    <div class="contact-item" data-aos="fade-right" data-aos-delay="300">
                         <div class="contact-icon">L</div>
                         <div>
                             <h3>LinkedIn</h3>
                             <a href="https://www.linkedin.com/in/sagnik-bose-01a885336/" target="_blank">linkedin.com/in/sagnik-bose</a>
                         </div>
                     </div>
-                    <div class="contact-item">
+                    <div class="contact-item" data-aos="fade-right" data-aos-delay="400">
                         <div class="contact-icon">I</div>
                         <div>
                             <h3>Instagram</h3>
@@ -1162,7 +1220,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="contact-form">
+                <div class="contact-form" data-aos="fade-left" data-aos-delay="100">
                     <form id="contactForm" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST"> <!-- Replace YOUR_FORMSPREE_ID -->
                         <div class="form-group">
                             <label for="name">Name</label>
@@ -1204,7 +1262,17 @@
         </div>
     </footer>
 
+    <!-- AOS JS (for scroll animations) -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // Initialize AOS library
+        AOS.init({
+            duration: 800, // Animation duration in ms
+            offset: 100, // Offset (in px) from the original trigger point
+            once: true, // Whether animation should happen only once - while scrolling down
+            easing: 'ease-in-out', // Default easing
+        });
+
         // Project data for modals
         const projects = [
             {
@@ -1286,19 +1354,25 @@
                 document.body.setAttribute('data-theme', 'dark');
                 localStorage.setItem('theme', 'dark');
             }
+            // Re-initialize AOS after theme change if styles affect element positions/visibility significantly
+            // AOS.refresh(); // Usually not needed unless layout drastically changes
         });
 
-        // Animate skill bars on scroll
-        const animateSkillBars = () => {
-            skillProgressBars.forEach(bar => {
-                const barTop = bar.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                // Animate when the top of the bar is within the viewport (plus a small offset)
-                if (barTop < windowHeight - 50) {
+        // Animate skill bars on scroll (using Intersection Observer for better performance)
+        const skillObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bar = entry.target;
                     bar.style.width = bar.getAttribute('data-width');
+                    observer.unobserve(bar); // Stop observing once animated
                 }
             });
-        };
+        }, { threshold: 0.5 }); // Trigger when 50% of the bar is visible
+
+        skillProgressBars.forEach(bar => {
+            skillObserver.observe(bar);
+        });
+
 
         // Project Modals
         projectDetailsButtons.forEach(button => {
@@ -1385,29 +1459,6 @@
         // Set current year in footer
         yearElement.textContent = new Date().getFullYear();
 
-        // Smooth scrolling for anchor links (already handled by CSS html { scroll-behavior: smooth; })
-        // If more complex offset logic is needed, uncomment and modify the JS below
-
-        /*
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    const headerOffset = header.offsetHeight; // Get header height
-                    const elementPosition = targetElement.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        */
-
         // Header shadow on scroll
         const handleScroll = () => {
             if (window.scrollY > 30) {
@@ -1415,19 +1466,20 @@
             } else {
                 header.classList.remove('scrolled');
             }
-            // Trigger skill bar animation on scroll as well
-            animateSkillBars();
+            // Note: Skill bar animation is now handled by Intersection Observer
         };
 
         window.addEventListener('scroll', handleScroll);
 
-        // Initial check for skill bars on load
+        // Initial check for header shadow on load
         window.addEventListener('load', () => {
-            animateSkillBars();
-            handleScroll(); // Check header shadow on load
+            handleScroll();
+            // Optional: Refresh AOS slightly after load to ensure correct calculations
+            setTimeout(() => {
+                AOS.refresh();
+            }, 100);
         });
 
     </script>
 </body>
 </html>
-
