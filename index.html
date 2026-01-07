@@ -4,35 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Portfolio of Sagnik Bose - Software Developer & AI Enthusiast">
-    <title>Sagnik Bose | Portfolio</title>
+    <title>Sagnik Bose | AI & Software</title>
     
-    <!-- Google Fonts: Space Grotesk (Headings) & Manrope (Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- CSS VARIABLES (LIGHT MODE) --- */
+        /* --- CSS VARIABLES --- */
         :root {
-            --bg-color: #ffffff;
-            --text-primary: #050505;       /* Deep Black */
-            --text-secondary: #404040;     /* Dark Gray */
-            --text-muted: #737373;         /* Light Gray */
-            
-            /* Light Mode Glass/Card Effects */
-            --glass-border: rgba(0, 0, 0, 0.08);
-            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            --card-hover-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
-            --accent-black: #000000;
+            --bg-color: #f8f9fa;
+            --text-primary: #0a0a0a;
+            --text-secondary: #525252;
+            --text-muted: #a3a3a3;
+            --accent: #000000;
+            --glass: rgba(255, 255, 255, 0.6);
+            --glass-border: rgba(0, 0, 0, 0.05);
         }
 
+        /* --- GLOBAL RESETS --- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            cursor: none; /* Hide default cursor for custom one */
+        }
+
+        html {
             scroll-behavior: smooth;
         }
 
@@ -40,15 +40,98 @@
             font-family: 'Manrope', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-primary);
-            line-height: 1.7;
             overflow-x: hidden;
-            /* Subtle Dot Pattern for Texture */
-            background-image: radial-gradient(#e5e5e5 1px, transparent 1px);
-            background-size: 24px 24px;
+            position: relative;
         }
 
-        h1, h2, h3, h4, .logo, .btn {
+        h1, h2, h3, h4, .logo, .btn, .marquee-content {
             font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* --- ANIMATED BACKGROUND BLOBS --- */
+        .bg-blobs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            background: #ffffff;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+            animation: moveBlob 20s infinite alternate;
+        }
+
+        .blob-1 {
+            width: 400px;
+            height: 400px;
+            background: #e0e0e0;
+            top: -100px;
+            left: -100px;
+        }
+
+        .blob-2 {
+            width: 500px;
+            height: 500px;
+            background: #f0f0f0;
+            bottom: -100px;
+            right: -100px;
+            animation-delay: -5s;
+        }
+
+        .blob-3 {
+            width: 300px;
+            height: 300px;
+            background: #d4d4d4;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: -10s;
+            opacity: 0.4;
+        }
+
+        @keyframes moveBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(40px, -40px) scale(1.1); }
+        }
+
+        /* --- CUSTOM CURSOR --- */
+        .cursor-dot,
+        .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--text-primary);
+        }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(0,0,0,0.5);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+
+        body:hover .cursor-outline.hovered {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(0,0,0,0.05);
+            border-color: transparent;
+            backdrop-filter: blur(2px);
         }
 
         /* --- UTILITIES --- */
@@ -58,56 +141,44 @@
             padding: 0 24px;
         }
 
-        .section-title {
-            font-size: 3.5rem;
-            margin-bottom: 4rem;
-            text-align: center;
-            color: var(--text-primary);
-            font-weight: 700;
-            letter-spacing: -1.5px;
-            text-transform: uppercase;
-        }
-
         .btn {
             display: inline-block;
             padding: 14px 32px;
-            border-radius: 6px;
+            border-radius: 50px; /* Modern pill shape */
             text-decoration: none;
             font-weight: 700;
-            font-size: 1rem;
             transition: all 0.3s ease;
-            cursor: pointer;
-            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
             text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
         }
 
-        /* Solid Black Button */
         .btn-primary {
-            background: var(--accent-black);
-            color: #ffffff;
-            border: 1px solid var(--accent-black);
+            background: var(--accent);
+            color: #fff;
+            border: 1px solid var(--accent);
         }
 
         .btn-primary:hover {
-            background: transparent;
-            color: var(--accent-black);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
-        /* Outline Button */
         .btn-outline {
             background: transparent;
-            border: 1px solid var(--accent-black);
-            color: var(--accent-black);
+            color: var(--accent);
+            border: 1px solid var(--accent);
         }
 
         .btn-outline:hover {
-            background: var(--accent-black);
-            color: #ffffff;
+            background: var(--accent);
+            color: #fff;
         }
 
-        /* --- NAVIGATION --- */
+        /* --- NAVBAR --- */
         nav {
             position: fixed;
             top: 0;
@@ -118,8 +189,8 @@
         }
 
         nav.scrolled {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--glass-border);
             padding: 15px 0;
         }
@@ -131,12 +202,12 @@
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--text-primary);
             text-decoration: none;
             letter-spacing: -1px;
-            text-transform: uppercase;
+            position: relative;
         }
 
         .nav-links {
@@ -149,14 +220,30 @@
             color: var(--text-secondary);
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.9rem;
-            transition: color 0.3s;
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--text-primary);
+            transition: width 0.3s ease;
         }
 
         .nav-links a:hover {
-            color: var(--accent-black);
+            color: var(--text-primary);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         /* --- HERO SECTION --- */
@@ -181,147 +268,167 @@
             text-align: center;
         }
 
-        .hero-text h1 {
-            font-size: 4rem;
-            margin-bottom: 15px;
+        /* GLITCH EFFECT FOR NAME */
+        .glitch-wrapper {
+            display: inline-block;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
             line-height: 1;
             font-weight: 700;
-            letter-spacing: -2px;
+            letter-spacing: -3px;
             color: var(--text-primary);
+            margin-bottom: 15px;
+            position: relative;
         }
 
         .hero-text h2 {
-            font-family: 'Space Grotesk', monospace;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: var(--text-secondary);
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             min-height: 1.6em;
             font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .hero-text p {
             color: var(--text-secondary);
             margin-bottom: 40px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            line-height: 1.8;
         }
 
-        /* --- UPDATED HERO IMAGE STYLES (Modern 3D Animated) --- */
+        /* IMAGE 3D STYLES */
         .hero-img-container {
             position: relative;
-            width: 320px;
-            height: 320px;
-            /* Perspective gives depth for 3D rotation effects */
+            width: 350px;
+            height: 350px;
             perspective: 1000px;
-            z-index: 10;
         }
 
         .hero-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* Removed basic border and circular shape */
-            border: none;
-            
-            /* Modern Organic Morphing Shape */
-            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            
-            /* Deep 3D Shadow */
-            box-shadow: 
-                15px 15px 40px rgba(0,0,0,0.15),
-                -10px -10px 30px rgba(255,255,255,0.8);
-                
-            /* Continuous Animation */
-            animation: morphFloat 8s ease-in-out infinite;
-            transition: all 0.5s ease;
-            cursor: pointer;
+            border-radius: 40px;
+            /* Stylized Border */
+            mask-image: linear-gradient(black, black);
+            -webkit-mask-image: -webkit-radial-gradient(white, black);
+            /* Soft Organic Shape Animation */
+            animation: float 6s ease-in-out infinite;
+            box-shadow: 20px 20px 60px rgba(0,0,0,0.1), -20px -20px 60px rgba(255,255,255,0.8);
+            transition: all 0.5s;
         }
 
-        /* Keyframes for the Liquid/Float effect */
-        @keyframes morphFloat {
-            0% {
-                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-                transform: translateY(0);
-            }
-            50% {
-                border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
-                transform: translateY(-20px); /* Float Up */
-                box-shadow: 20px 30px 60px rgba(0,0,0,0.2); /* Shadow gets deeper as it lifts */
-            }
-            100% {
-                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-                transform: translateY(0);
-            }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            50% { transform: translateY(-15px) rotate(2deg); border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
         }
 
-        .hero-img:hover {
-            /* On hover, pause the morph but tilt nicely */
-            animation-play-state: paused;
-            transform: scale(1.05) rotateZ(2deg);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
-            /* Make it slightly more square-ish on hover for a tech feel */
-            border-radius: 40px; 
+        /* --- INFINITE MARQUEE --- */
+        .marquee {
+            position: relative;
+            width: 100vw;
+            max-width: 100%;
+            height: 80px;
+            overflow: hidden;
+            background: var(--text-primary);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            transform: rotate(-2deg) scale(1.05); /* Jaunty angle */
+            margin: 40px 0 80px 0;
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
         }
 
-        /* --- ABOUT SECTION (UPDATED: Soft Silver) --- */
+        .marquee-content {
+            display: flex;
+            animation: scrolling 20s linear infinite;
+        }
+
+        .marquee-item {
+            font-size: 2rem;
+            font-weight: 700;
+            padding: 0 2rem;
+            white-space: nowrap;
+            text-transform: uppercase;
+        }
+
+        @keyframes scrolling {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- SECTIONS --- */
         section {
-            padding: 120px 0;
+            padding: 100px 0;
         }
 
-        .about-card {
-            background: #e5e5e5; /* Soft Silver */
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(0,0,0,0.05);
-            border-radius: 16px;
-            box-shadow: var(--card-shadow);
-            padding: 60px 40px;
+        .section-header {
+            margin-bottom: 4rem;
+            text-align: center;
+            overflow: hidden; /* For text reveal */
         }
 
-        /* --- SKILLS SECTION (UPDATED: Dark Charcoal) --- */
+        .section-title {
+            font-size: 3rem;
+            color: var(--text-primary);
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            text-transform: uppercase;
+            display: inline-block;
+        }
+
+        /* --- SKILLS (Tech Stack) --- */
         .arsenal-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
         }
 
         .arsenal-card {
-            padding: 35px;
-            transition: all 0.4s ease;
-            background: #171717; /* Dark Charcoal / Black */
-            border: 1px solid #333;
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border: 1px solid rgba(0,0,0,0.05);
             border-radius: 12px;
-            color: #ffffff; /* White text */
+            transition: all 0.3s ease;
         }
 
         .arsenal-card:hover {
+            background: #000;
+            color: #fff;
             transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            background: #000000; /* Pure black on hover */
+        }
+
+        .arsenal-card:hover h3, .arsenal-card:hover p, .arsenal-card:hover i {
+            color: #fff;
         }
 
         .arsenal-card h3 {
-            color: #ffffff; /* White Heading */
-            margin-bottom: 15px;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 1.4rem;
-        }
-
-        .arsenal-card i {
-            font-size: 1.4rem;
-            color: #ffffff; /* White Icon */
+            gap: 10px;
+            transition: color 0.3s;
         }
 
         .arsenal-card p {
-            color: #a3a3a3; /* Light Gray Text */
-            font-size: 1rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
             line-height: 1.6;
+            transition: color 0.3s;
         }
 
-        /* --- PROJECTS SECTION (UPDATED: Light Gray) --- */
+        /* --- PROJECTS (Tilt Cards) --- */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -329,319 +436,295 @@
         }
 
         .project-card {
+            background: #ffffff;
+            border-radius: 20px;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            transition: all 0.4s ease;
-            background: #f4f4f5; /* Light Gray */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
             border: 1px solid rgba(0,0,0,0.05);
-            border-radius: 16px;
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
         }
 
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--card-hover-shadow);
-            background: #ffffff; /* White on hover for pop */
-            border-color: rgba(0,0,0,0.1);
+        /* Vanilla Tilt handles the hover transform, but we add inner styling */
+        .project-img-wrapper {
+            overflow: hidden;
+            height: 240px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
         }
 
         .project-img {
             width: 100%;
-            height: 240px;
+            height: 100%;
             object-fit: cover;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            transition: all 0.4s ease;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-img {
+            transform: scale(1.1);
         }
 
         .project-content {
             padding: 30px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+            transform: translateZ(20px); /* Pop out effect */
         }
 
         .project-content h3 {
-            margin-bottom: 12px;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
             color: var(--text-primary);
         }
 
         .project-content p {
+            font-size: 0.95rem;
             color: var(--text-secondary);
-            font-size: 1rem;
             margin-bottom: 25px;
-            flex: 1;
+            line-height: 1.6;
         }
 
-        .project-links {
-            margin-top: auto;
-        }
-
-        /* --- CONTACT (KEPT: Jet Black) --- */
+        /* --- CONTACT --- */
         .contact-wrapper {
+            background: #0a0a0a;
+            color: white;
+            padding: 80px 40px;
+            border-radius: 24px;
             text-align: center;
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 60px 40px;
-            background: #050505; /* Jet Black */
-            border-radius: 16px;
-            color: #ffffff;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
         }
 
-        .contact-wrapper .section-title {
-            color: #ffffff;
-            margin-bottom: 1.5rem;
+        /* Decorative background circle in contact */
+        .contact-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+            border-radius: 50%;
         }
-        
-        .contact-wrapper p {
-            color: #a3a3a3;
-            margin-bottom: 2.5rem;
+
+        .contact-wrapper h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
         }
 
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 25px;
+            gap: 20px;
             margin: 40px 0;
         }
 
-        .contact-wrapper .social-icon {
-            width: 60px;
-            height: 60px;
+        .social-icon {
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
+            background: rgba(255,255,255,0.1);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            color: #ffffff;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: all 0.3s ease;
+            color: #fff;
             text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .contact-wrapper .social-icon:hover {
-            background: #ffffff;
-            color: #000000;
-            transform: scale(1.1);
-            border-color: #ffffff;
-        }
-        
-        .contact-wrapper .btn-primary {
-            background: #ffffff;
-            color: #000000;
-            border-color: #ffffff;
-        }
-        
-        .contact-wrapper .btn-primary:hover {
-            background: transparent;
-            color: #ffffff;
+        .social-icon:hover {
+            background: #fff;
+            color: #000;
+            transform: scale(1.1) rotate(10deg);
         }
 
         /* --- FOOTER --- */
         footer {
+            padding: 40px 0;
             text-align: center;
-            padding: 60px 0;
-            border-top: 1px solid var(--glass-border);
-            color: var(--text-secondary);
             font-size: 0.9rem;
-            background: #ffffff;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(0,0,0,0.05);
         }
 
-        /* --- ANIMATIONS --- */
-        .hidden {
+        /* --- SCROLL REVEAL ANIMATIONS --- */
+        .reveal-text {
+            clip-path: inset(0 0 100% 0);
+            transition: clip-path 1s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        
+        .reveal-text.active {
+            clip-path: inset(0 0 0 0);
+        }
+
+        .fade-up {
             opacity: 0;
             transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: all 0.8s ease-out;
         }
 
-        .show {
+        .fade-up.active {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .cursor {
-            display: inline-block;
-            width: 10px;
-            height: 3px;
-            background-color: var(--text-primary);
-            animation: blink 1s infinite;
-            vertical-align: middle;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        /* --- MEDIA QUERIES --- */
+        /* --- RESPONSIVE --- */
         @media (min-width: 768px) {
             .hero-content {
                 flex-direction: row;
                 text-align: left;
             }
-            
             .hero-text {
                 text-align: left;
             }
-
             .hero-text p {
                 margin-left: 0;
             }
-
             .hero-img-container {
-                width: 420px;
-                height: 420px;
+                width: 450px;
+                height: 450px;
             }
-            
-            .section-title {
-                font-size: 4.5rem;
+            .hero-title {
+                font-size: 5.5rem;
             }
         }
-
+        
         @media (max-width: 768px) {
-            .nav-links {
-                display: none; 
-            }
-            .section-title {
-                font-size: 2.5rem;
-            }
-            .hero-text h1 {
-                font-size: 2.8rem;
-            }
+            .nav-links { display: none; }
+            .hero-title { font-size: 3rem; }
+            .cursor-dot, .cursor-outline { display: none; } /* Disable custom cursor on touch */
         }
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
     <nav id="navbar">
         <div class="container nav-container">
-            <a href="#" class="logo">SAGNIK<span style="color: var(--text-muted);">.DEV</span></a>
+            <a href="#" class="logo link-hover">SAGNIK<span style="color: var(--text-muted);">.DEV</span></a>
             <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#about" class="link-hover">About</a></li>
+                <li><a href="#skills" class="link-hover">Skills</a></li>
+                <li><a href="#projects" class="link-hover">Projects</a></li>
+                <li><a href="#contact" class="link-hover">Contact</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <main>
         <section id="hero">
             <div class="container hero-content">
-                <div class="hero-text hidden">
-                    <h1>I'M SAGNIK BOSE.</h1>
-                    <h2><span id="typewriter"></span><span class="cursor"></span></h2>
-                    <p>
-                        Bridging the gap between complex AI systems and user-friendly applications. 
-                        Specializing in Python, Flutter, and Generative AI.
+                <div class="hero-text">
+                    <div class="glitch-wrapper fade-up">
+                        <h1 class="hero-title">SAGNIK BOSE</h1>
+                    </div>
+                    <h2 class="fade-up"><span id="typewriter"></span><span style="animation: blink 1s infinite">|</span></h2>
+                    <p class="fade-up">
+                        Architecting the bridge between complex AI systems and human-centric applications. 
+                        Specializing in <strong>Python</strong>, <strong>Flutter</strong>, and <strong>Generative AI</strong>.
                     </p>
-                    <div style="display: flex; gap: 20px; justify-content: center; @media(min-width:768px){justify-content: flex-start;}">
-                        <a href="#projects" class="btn btn-primary">View Work</a>
-                        <a href="#contact" class="btn btn-outline">Contact Me</a>
+                    <div class="fade-up" style="display: flex; gap: 20px; justify-content: center; @media(min-width:768px){justify-content: flex-start;}">
+                        <a href="#projects" class="btn btn-primary link-hover">View Work</a>
+                        <a href="#contact" class="btn btn-outline link-hover">Contact Me</a>
                     </div>
                 </div>
-                <div class="hero-img-container hidden">
+                <div class="hero-img-container fade-up">
                     <img src="https://github.com/cyberytti/portfoliopage/blob/main/image.png?raw=true" alt="Sagnik Bose" class="hero-img">
                 </div>
             </div>
         </section>
 
-        <!-- About Section -->
+        <div class="marquee">
+            <div class="marquee-content">
+                <div class="marquee-item">Python Development • Generative AI • Flutter • Full Stack • Automation • </div>
+                <div class="marquee-item">Python Development • Generative AI • Flutter • Full Stack • Automation • </div>
+                <div class="marquee-item">Python Development • Generative AI • Flutter • Full Stack • Automation • </div>
+            </div>
+        </div>
+
         <section id="about">
             <div class="container">
-                <h2 class="section-title hidden">About Me</h2>
-                <div class="about-card hidden">
-                    <p style="font-size: 1.3rem; color: var(--text-secondary); max-width: 900px; margin: 0 auto; text-align: center; line-height: 1.8;">
-                        "I am a software development student passionate about bridging the gap between complex AI systems and user-friendly applications. Specializing in Python and Flutter, I build scalable tools that leverage Machine Learning and Automation to solve real-world problems. My recent work focuses on democratizing access to LLMs and creating efficient workflows for developers and researchers."
+                <div class="section-header">
+                    <h2 class="section-title reveal-text">The Narrative</h2>
+                </div>
+                <div class="fade-up" style="background: rgba(255,255,255,0.5); backdrop-filter: blur(10px); padding: 40px; border-radius: 20px; text-align: center; border: 1px solid rgba(0,0,0,0.05);">
+                    <p style="font-size: 1.25rem; color: var(--text-secondary); line-height: 1.8; max-width: 900px; margin: 0 auto;">
+                        "I am a developer who believes code is art. Passionate about democratizing access to LLMs and creating efficient workflows, I build scalable tools that leverage Machine Learning to solve real-world problems. Whether it's optimization algorithms or pixel-perfect UIs, I aim for precision."
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- Skills Section -->
         <section id="skills">
             <div class="container">
-                <h2 class="section-title hidden">Technical Arsenal</h2>
+                <div class="section-header">
+                    <h2 class="section-title reveal-text">Technical Arsenal</h2>
+                </div>
                 <div class="arsenal-grid">
-                    <div class="arsenal-card hidden">
+                    <div class="arsenal-card fade-up">
                         <h3><i class="fa-brands fa-python"></i> Advanced Python</h3>
-                        <p>Architecting robust backend logic and automation pipelines for scalable applications.</p>
+                        <p>Robust backend logic and automation pipelines for scalable applications.</p>
                     </div>
-                    <div class="arsenal-card hidden">
+                    <div class="arsenal-card fade-up">
                         <h3><i class="fa-brands fa-flutter"></i> Cross-Platform</h3>
-                        <p>Crafting pixel-perfect, native experiences with Flutter for mobile and web.</p>
+                        <p>Pixel-perfect, native experiences for mobile and web.</p>
                     </div>
-                    <div class="arsenal-card hidden">
+                    <div class="arsenal-card fade-up">
                         <h3><i class="fa-solid fa-brain"></i> GenAI Orchestration</h3>
-                        <p>Deploying and fine-tuning SOTA models like Ollama, Whisper, and Gemma.</p>
+                        <p>Fine-tuning SOTA models like Ollama, Whisper, and Gemma.</p>
                     </div>
-                    <div class="arsenal-card hidden">
+                    <div class="arsenal-card fade-up">
                         <h3><i class="fa-brands fa-docker"></i> Containerization</h3>
-                        <p>Streamlining deployments with Docker and cloud environments for consistency.</p>
-                    </div>
-                    <div class="arsenal-card hidden">
-                        <h3><i class="fa-solid fa-server"></i> API Infrastructure</h3>
-                        <p>Building high-availability endpoints with Flask and ngrok for remote access.</p>
+                        <p>Streamlined deployments using Docker and Cloud infrastructure.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Projects Section -->
         <section id="projects">
             <div class="container">
-                <h2 class="section-title hidden">Selected Works</h2>
+                <div class="section-header">
+                    <h2 class="section-title reveal-text">Selected Works</h2>
+                </div>
                 <div class="projects-grid">
                     
-                    <!-- Project 1 -->
-                    <div class="project-card hidden">
-                        <img src="https://github.com/cyberytti/ToolHunt/blob/main/docs/showcase_images/Screenshot%20from%202025-09-04%2015-57-39.png?raw=true" alt="ToolHunt" class="project-img">
+                    <div class="project-card fade-up" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
+                        <div class="project-img-wrapper">
+                            <img src="https://github.com/cyberytti/ToolHunt/blob/main/docs/showcase_images/Screenshot%20from%202025-09-04%2015-57-39.png?raw=true" alt="ToolHunt" class="project-img">
+                        </div>
                         <div class="project-content">
                             <h3>ToolHunt</h3>
-                            <p>An advanced cybersecurity search engine for finding tools from 3,000+ options using semantic search.</p>
-                            <div class="project-links">
-                                <a href="https://github.com/cyberytti/ToolHunt" target="_blank" class="btn btn-outline" style="width: 100%; text-align: center; font-size: 0.8rem;">View Code <i class="fa-brands fa-github"></i></a>
-                            </div>
+                            <p>Cybersecurity search engine indexing 3,000+ tools with semantic search capabilities.</p>
+                            <a href="https://github.com/cyberytti/ToolHunt" target="_blank" class="btn btn-outline link-hover" style="font-size: 0.8rem; padding: 10px 20px;">GitHub <i class="fa-brands fa-github"></i></a>
                         </div>
                     </div>
 
-                    <!-- Project 2 -->
-                    <div class="project-card hidden">
-                        <img src="https://github.com/cyberytti/OllamaKaggle/blob/main/Screenshot%20from%202025-03-18%2014-02-20.png?raw=true" alt="OllamaKaggle" class="project-img">
+                    <div class="project-card fade-up" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
+                        <div class="project-img-wrapper">
+                            <img src="https://github.com/cyberytti/OllamaKaggle/blob/main/Screenshot%20from%202025-03-18%2014-02-20.png?raw=true" alt="OllamaKaggle" class="project-img">
+                        </div>
                         <div class="project-content">
                             <h3>OllamaKaggle</h3>
-                            <p>Enables free LLM development using Kaggle's 2x Tesla T4 GPUs with remote access via ngrok.</p>
-                            <div class="project-links">
-                                <a href="https://github.com/cyberytti/OllamaKaggle" target="_blank" class="btn btn-outline" style="width: 100%; text-align: center; font-size: 0.8rem;">View Code <i class="fa-brands fa-github"></i></a>
-                            </div>
+                            <p>Leveraging Kaggle's T4 GPUs for free LLM development with remote tunneling.</p>
+                            <a href="https://github.com/cyberytti/OllamaKaggle" target="_blank" class="btn btn-outline link-hover" style="font-size: 0.8rem; padding: 10px 20px;">GitHub <i class="fa-brands fa-github"></i></a>
                         </div>
                     </div>
 
-                    <!-- Project 3 -->
-                    <div class="project-card hidden">
-                        <img src="https://github.com/cyberytti/Video2Transcript/blob/main/Screenshot%20from%202025-03-25%2009-13-02.png?raw=true" alt="Video2Transcript" class="project-img">
+                    <div class="project-card fade-up" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
+                        <div class="project-img-wrapper">
+                            <img src="https://github.com/cyberytti/Video2Transcript/blob/main/Screenshot%20from%202025-03-25%2009-13-02.png?raw=true" alt="Video2Transcript" class="project-img">
+                        </div>
                         <div class="project-content">
                             <h3>Video2Transcript</h3>
-                            <p>Flask-based app converting MP4 to AI-generated transcripts using Whisper and Gemma3.</p>
-                            <div class="project-links">
-                                <a href="https://github.com/cyberytti/Video2Transcript" target="_blank" class="btn btn-outline" style="width: 100%; text-align: center; font-size: 0.8rem;">View Code <i class="fa-brands fa-github"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 4 -->
-                    <div class="project-card hidden">
-                        <img src="https://github.com/cyberytti/portfoliopage/blob/main/tictactoeAI.png?raw=true" alt="Tic-Tac-Toe AI" class="project-img">
-                        <div class="project-content">
-                            <h3>Tic-Tac-Toe AI</h3>
-                            <p>A command-line game against an intelligent AI that explains strategy and analyzes the board.</p>
-                            <div class="project-links">
-                                <a href="https://github.com/cyberytti/portfoliopage" target="_blank" class="btn btn-outline" style="width: 100%; text-align: center; font-size: 0.8rem;">View Code <i class="fa-brands fa-github"></i></a>
-                            </div>
+                            <p>AI-powered transcription converting MP4 to text using Whisper and Gemma3.</p>
+                            <a href="https://github.com/cyberytti/Video2Transcript" target="_blank" class="btn btn-outline link-hover" style="font-size: 0.8rem; padding: 10px 20px;">GitHub <i class="fa-brands fa-github"></i></a>
                         </div>
                     </div>
 
@@ -649,33 +732,71 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
         <section id="contact">
             <div class="container">
-                <div class="contact-wrapper hidden">
-                    <h2 class="section-title">Let's Connect</h2>
-                    <p>
-                        Interested in collaborating on AI projects or need a robust full-stack solution? 
-                        My inbox is always open.
+                <div class="contact-wrapper fade-up">
+                    <h2 class="section-title" style="color:white;">Ready to Collaborate?</h2>
+                    <p style="color: #a3a3a3; max-width: 600px; margin: 0 auto;">
+                        I'm currently available for freelance projects and open to full-time opportunities. 
+                        Let's build something intelligent.
                     </p>
                     
                     <div class="social-links">
-                        <a href="https://github.com/cyberytti/" target="_blank" class="social-icon" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/sagnik-bose-01a885336/" target="_blank" class="social-icon" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                        <a href="https://www.instagram.com/sagnik628?igsh=MXEyamU0MDRlc2J2Zw==" target="_blank" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://github.com/cyberytti/" target="_blank" class="social-icon link-hover"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/sagnik-bose-01a885336/" target="_blank" class="social-icon link-hover"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="mailto:sbose3739@gmail.com" class="social-icon link-hover"><i class="fa-solid fa-envelope"></i></a>
                     </div>
 
-                    <a href="mailto:sbose3739@gmail.com" class="btn btn-primary">
-                        <i class="fa-solid fa-envelope"></i> Say Hello
+                    <a href="mailto:sbose3739@gmail.com" class="btn btn-primary link-hover" style="background: white; color: black; border-color: white;">
+                        Initialize Contact
                     </a>
                 </div>
             </div>
         </section>
     </main>
 
-    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Sagnik Bose. Built with Code & Caffeine.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+
     <script>
-        // --- TYPEWRITER EFFECT ---
+        // --- CUSTOM CURSOR LOGIC ---
+        const cursorDot = document.querySelector('[data-cursor-dot]');
+        const cursorOutline = document.querySelector('[data-cursor-outline]');
+        const linkHovers = document.querySelectorAll('.link-hover, a, button, .project-card');
+
+        window.addEventListener('mousemove', function(e) {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            // Dot follows instantly
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            // Outline follows with lag (animation in CSS)
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+
+        // Hover Effect for Cursor
+        linkHovers.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                cursorOutline.classList.add('hovered');
+                cursorDot.style.opacity = '0';
+            });
+            link.addEventListener('mouseleave', () => {
+                cursorOutline.classList.remove('hovered');
+                cursorDot.style.opacity = '1';
+            });
+        });
+
+        // --- TYPEWRITER ---
         const textToType = "SOFTWARE DEVELOPER & AI ENTHUSIAST";
         const typeWriterElement = document.getElementById('typewriter');
         let i = 0;
@@ -684,42 +805,31 @@
             if (i < textToType.length) {
                 typeWriterElement.innerHTML += textToType.charAt(i);
                 i++;
-                setTimeout(typeWriter, 80);
+                setTimeout(typeWriter, 50);
             }
         }
+        setTimeout(typeWriter, 1000);
 
-        // --- INTERSECTION OBSERVER (SCROLL ANIMATIONS) ---
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: "0px 0px -50px 0px"
-        };
-
+        // --- SCROLL ANIMATIONS (Intersection Observer) ---
+        const observerOptions = { threshold: 0.1 };
+        
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('show');
+                    entry.target.classList.add('active');
                     observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
 
-        const hiddenElements = document.querySelectorAll('.hidden');
-        hiddenElements.forEach((el) => observer.observe(el));
+        document.querySelectorAll('.fade-up, .reveal-text').forEach((el) => observer.observe(el));
 
-        // --- NAVBAR SCROLL EFFECT ---
+        // --- NAVBAR SCROLL ---
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
+            if (window.scrollY > 50) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
         });
-
-        // Start Typewriter on Load
-        window.onload = () => {
-            setTimeout(typeWriter, 500);
-        };
     </script>
 </body>
 </html>
